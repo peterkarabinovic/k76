@@ -1,2 +1,2 @@
 # k76
-Learn and Tests Projects
+Learn and Test Projects
