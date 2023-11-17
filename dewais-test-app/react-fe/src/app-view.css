@@ -1,0 +1,11 @@
+.app-form {
+    max-width: 500px;
+    min-width: 300px;
+    margin: 0 auto
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px
+}

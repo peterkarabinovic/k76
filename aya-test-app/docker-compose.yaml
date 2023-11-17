@@ -1,0 +1,39 @@
+version: "3.5"
+
+services:
+  exchange-reports:
+    container_name: exchange-reports
+    build:
+      context: ./app
+    environment:
+      - EXCHANGE_DB_HOST=postgres
+      - EXCHANGE_DB_PORT=5433
+      - EXCHANGE_DB_NAME=exchanges
+      - EXCHANGE_DB_USER=appuser
+      - EXCHANGE_DB_PASSWORD=1234
+      - DATA_FILE_PATH=/tmp/exchange-data/test-data.txt
+      - PORT=8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./files:/tmp/exchange-data
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+
+  postgres:
+    container_name: postgres
+    image: postgres:14-alpine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -p 5433 -d exchanges -U appuser"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5433:5433"
+    command: -p 5433 # -c log_statement=all
+    environment:
+      - POSTGRES_DB=exchanges
+      - POSTGRES_USER=appuser
+      - POSTGRES_PASSWORD=1234

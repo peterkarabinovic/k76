@@ -1,0 +1,32 @@
+{
+  "name": "aya-test-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc && copyfiles -u 2 ./src/exchange-database/**/*.sql dist/exchange-database/",
+    "test": "mocha --require ts-node/register --timeout 5000 --exit --recursive ./test/**/*.ts",
+    "dev": "ts-node ./src/server.ts",
+    "start": "node dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.23.2",
+    "graphql": "^16.8.1",
+    "mercurius": "^13.1.0",
+    "pg": "^8.11.3",
+    "postgrator": "^7.2.0",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/pg": "^8.10.2",
+    "copyfiles": "^2.4.1",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
